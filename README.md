@@ -21,6 +21,7 @@ Rake Tasks
 
 The repository contains a `Rakefile` that includes tasks that are installed with the Chef libraries. To view the tasks available with in the repository with a brief description, run `rake -T`.
 
+
 The default task (`default`) is run when executing `rake` with no arguments. It will call the task `test_cookbooks`.
 
 The following tasks are not directly replaced by knife sub-commands.
