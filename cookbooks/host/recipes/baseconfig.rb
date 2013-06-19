@@ -26,8 +26,8 @@ end
 template "/etc/hosts.temp" do
   source "hosts.erb"
   variables({
-    :host_name => "#{hostname}"
-    :short_name => "#{shortname}"
+    :host_name => "#{hostname}",
+    :short_name => "#{shortname}",
     :local_ip => "#{localip}"
   })
 end
