@@ -21,12 +21,19 @@ user "wordster" do
   supports  :manage_home => true
 end
 
-#directory "/home/wordster" do
-#    mode        "0755"
-#    owner       "wordster"
-#    group       "wordster"
-#    action      :create
-#end
+directory "/home/wordster/.ssh" do
+    mode        "0755"
+    owner       "wordster"
+    group       "wordster"
+    action      :create
+    notifies :run, "execute[copy-user-key]", :immediately
+end
+
+execute "copy-user-key" do
+  command "/bin/cp /home/ubuntu/.ssh/authorized_keys /home/wordster/.ssh/; chown wordster.wordster /home/wordster/.ssh/authorized_keys"
+  action :nothing
+  subscribes :run, "directory[/home/wordster/.ssh]", :immediately
+end
 
 template "/etc/sudoers.d/wordster" do
   source "wordster_user.erb"
