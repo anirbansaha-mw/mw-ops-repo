@@ -13,10 +13,10 @@ end
 
 template "/etc/ntp.conf" do
   source "ntp.conf.erb"
-  notifies :reload, "service[ntp]", :immediately
+  notifies :restart, "service[ntp]", :immediately
 end
 
 service "ntp" do
-  action[:enable,:start]
+  action [:enable, :start]
   subscribes :reload, "template[/etc/ntp.conf]", :immediately
 end
