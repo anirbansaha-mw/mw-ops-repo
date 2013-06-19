@@ -18,7 +18,15 @@ user "wordster" do
   gid "wordster"
   home "/home/wordster"
   shell "/bin/bash"
+  supports  :manage_home => true
 end
+
+#directory "/home/wordster" do
+#    mode        "0755"
+#    owner       "wordster"
+#    group       "wordster"
+#    action      :create
+#end
 
 template "/etc/sudoers.d/wordster" do
   source "wordster_user.erb"
