@@ -37,4 +37,5 @@ end
 
 template "/etc/sudoers.d/wordster" do
   source "wordster_user.erb"
+  mode 00440
 end
