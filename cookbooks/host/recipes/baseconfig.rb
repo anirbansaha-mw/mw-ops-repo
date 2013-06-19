@@ -18,7 +18,7 @@ template "/etc/hostname" do
   variables({
     :host_name => "#{hostname}"
   })
-  notifies :run, "execute[set-hostname]"
+  notifies :run, "execute[set-hostname]", :immediately
 end
 
 execute "set-hostname" do
