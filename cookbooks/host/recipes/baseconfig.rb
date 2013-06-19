@@ -8,10 +8,12 @@
 #
 require 'open-uri'
 userdata = open('http://169.254.169.254/latest/user-data/').read
+localip = open('http://169.254.169.254/latest/meta-data/local-ipv4/').read
 
 pre_hostname, pre_tier = "#{userdata}".split
 hostname = "#{pre_hostname}".split("=")[1]
 tier = "#{pre_tier}".split("=")[1]
+shortname = "#{hostname}".split(".")[0]
 
 template "/etc/hostname" do
   source "hostname.erb"
@@ -19,6 +21,15 @@ template "/etc/hostname" do
     :host_name => "#{hostname}"
   })
   notifies :run, "execute[set-hostname]", :immediately
+end
+
+template "/etc/hosts.temp" do
+  source "hosts.erb"
+  variables({
+    :host_name => "#{hostname}"
+    :short_name => "#{shortname}"
+    :local_ip => "#{localip}"
+  })
 end
 
 execute "set-hostname" do
