@@ -19,7 +19,6 @@ end
 execute "start-daemontools" do
   command "/sbin/initctl start svscan"
   action :nothing
-  subscribes :run, "package[daemontools-run]", :immediately
 end
 
 link "/service" do
@@ -58,5 +57,4 @@ end
 execute "start-sync-service" do
   command "/usr/bin/svc -t /service/chef-client-sync"
   action :nothing
-  subscribes :run, "template[/service/chef-client-sync/run]", :immediately
 end
