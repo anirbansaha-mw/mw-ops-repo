@@ -23,7 +23,7 @@ template "/etc/hostname" do
   notifies :run, "execute[set-hostname]", :immediately
 end
 
-template "/etc/hosts.temp" do
+template "/etc/hosts" do
   source "hosts.erb"
   variables({
     :host_name => "#{hostname}",
