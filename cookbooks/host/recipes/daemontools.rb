@@ -42,10 +42,16 @@ end
 
 template "/service/chef-client-sync/log/run" do
   source "daemontools_log_run.erb"
+  mode "0755"
+  owner "root"
+  group "root"
 end
 
 template "/service/chef-client-sync/run" do
   source "daemontools_run.erb"
+  mode "0755"
+  owner "root"
+  group "root"
   notifies :run, "execute[start-sync-service]", :immediately
 end
 
