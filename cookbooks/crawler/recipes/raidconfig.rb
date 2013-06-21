@@ -39,8 +39,8 @@ end
 
 mdadm "/dev/md0" do
   devices [ "#{disk_list}" ]
-  level "0"
-  chunk "64"
+  level 0
+  chunk 64
   action [ :create, :assemble ]
   notifies :run, "execute[update-mdadm-file]", :immediately
 end
