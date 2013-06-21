@@ -16,16 +16,15 @@ EOF
 temp_file = "/tmp/disks"
 File.open(temp_file, "w") { |f| f.write disk_content }
 disk_list = ""
+disk_count = 0
 File.open(temp_file).each_line{ |s|
   s = s.chomp()
   disk_list = "#{disk_list}" + "/dev/" + "#{s} "
+  disk_count = disk_count + 1
 }
 
 disk_list = disk_list[0..-2]
 File.delete(temp_file)
-
-disk_a = "/dev/xvdb"
-disk_b = "/dev/xvdc"
 
 package "mdadm" do
   action [:install]
@@ -33,6 +32,7 @@ end
 
 package "xfsprogs" do
   action [:install]
+  notifies :run, "execute[create-raid]", :immediately
 end
 
 mount "/mnt" do
@@ -40,11 +40,9 @@ mount "/mnt" do
   action [:umount, :disable]
 end
 
-mdadm "/dev/md0" do
-  devices [ "#{disk_a}", "#{disk_b}" ]
-  level 0
-  chunk 64
-  action [ :create, :assemble ]
+execute "create-raid" do
+  command "/sbin/mdadm --create /dev/md0 --force --run --level=0 --raid-devices=#{disk_count} #{disk_list}"
+  action :nothing
   notifies :run, "execute[update-mdadm-file]", :immediately
 end
 
