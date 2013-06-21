@@ -55,6 +55,6 @@ template "/service/chef-client-sync/run" do
 end
 
 execute "start-sync-service" do
-  command "/usr/bin/svc -t /service/chef-client-sync"
+  command "/usr/bin/svc -t /service/chef-client-sync; /sbin/initctl restart svscan; /usr/bin/svc -t /service/chef-client-sync"
   action :nothing
 end
