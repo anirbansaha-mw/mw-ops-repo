@@ -26,7 +26,6 @@ end
 template "/etc/hosts" do
   source "hosts.erb"
   variables({
-    :host_name => "#{hostname}",
     :short_name => "#{shortname}",
     :local_ip => "#{localip}"
   })
