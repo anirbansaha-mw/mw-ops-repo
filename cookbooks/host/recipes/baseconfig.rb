@@ -45,5 +45,4 @@ end
 execute "set-hostname" do
   command "/sbin/start hostname"
   action :nothing
-  subscribes :run, "template[/etc/hostname]", :immediately
 end
