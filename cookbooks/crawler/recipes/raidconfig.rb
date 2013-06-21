@@ -18,10 +18,10 @@ File.open(temp_file, "w") { |f| f.write disk_content }
 disk_list = ""
 File.open(temp_file).each_line{ |s|
   s = s.chomp()
-  disk_list = "#{disk_list}" + "\"/dev/" + "#{s}\", "
+  disk_list = "#{disk_list}" + "/dev/" + "#{s} "
 }
 
-disk_list = disk_list[0..-3]
+disk_list = disk_list[0..-2]
 File.delete(temp_file)
 
 package "mdadm" do
