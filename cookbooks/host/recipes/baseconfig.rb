@@ -15,6 +15,9 @@ hostname = "#{pre_hostname}".split("=")[1]
 tier = "#{pre_tier}".split("=")[1]
 shortname = "#{hostname}".split(".")[0]
 
+dpkg_package "landscape-common" do
+  action :purge
+end
 
 template "/etc/motd" do
   mode "0644"
