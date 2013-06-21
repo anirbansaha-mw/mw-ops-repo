@@ -15,6 +15,14 @@ hostname = "#{pre_hostname}".split("=")[1]
 tier = "#{pre_tier}".split("=")[1]
 shortname = "#{hostname}".split(".")[0]
 
+
+template "/etc/motd" do
+  mode "0644"
+  owner "root"
+  group "root"
+  source "motd.erb"
+end
+
 template "/etc/hostname" do
   source "hostname.erb"
   variables({

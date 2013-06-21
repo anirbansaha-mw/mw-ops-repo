@@ -11,6 +11,10 @@ package "mdadm" do
   action [:install]
 end
 
+package "xfsprogs" do
+  action [:install]
+end
+
 template "/etc/ntp.conf" do
   source "ntp.conf.erb"
   notifies :restart, "service[ntp]", :immediately
