@@ -15,12 +15,7 @@ package "xfsprogs" do
   action [:install]
 end
 
-template "/etc/ntp.conf" do
-  source "ntp.conf.erb"
-  notifies :restart, "service[ntp]", :immediately
-end
-
-service "ntp" do
-  action [:enable, :start]
-  subscribes :reload, "template[/etc/ntp.conf]", :immediately
+mount "/mnt" do
+  device "/dev/xvdb"
+  action :umount
 end
