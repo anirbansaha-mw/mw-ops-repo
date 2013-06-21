@@ -49,4 +49,26 @@ end
 execute "update-mdadm-file" do
   command "/sbin/mdadm --detail --scan >> /etc/mdadm/mdadm.conf"
   action :nothing
+  notifies :run, "execute[create-filesystem]", :immediately
+end
+
+execute "create-filesystem" do
+  command "/sbin/mkfs.xfs /dev/md0"
+  action :nothing
+end
+
+directory "/mnt/local" do
+    mode        "0755"
+    owner       "wordster"
+    group       "wordster"
+    action      :create
+end
+
+mount "/mnt/local" do
+  device "/dev/md0"
+  fstype "xfs"
+  options "defaults"
+  dump 0
+  pass 0
+  action   [:mount, :enable]
 end
