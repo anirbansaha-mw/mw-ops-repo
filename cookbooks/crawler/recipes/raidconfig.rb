@@ -34,10 +34,5 @@ end
 
 mount "/mnt" do
   device "/dev/xvdb"
-  action :umount
-end
-
-mount "/mnt" do
-  device "/dev/xvdb"
-  action :disable
+  action [:umount, :disable]
 end
