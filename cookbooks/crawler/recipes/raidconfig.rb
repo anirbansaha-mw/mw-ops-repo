@@ -24,6 +24,9 @@ File.open(temp_file).each_line{ |s|
 disk_list = disk_list[0..-2]
 File.delete(temp_file)
 
+disk_a = "/dev/xvdb"
+disk_b = "/dev/xvdc"
+
 package "mdadm" do
   action [:install]
 end
@@ -38,7 +41,7 @@ mount "/mnt" do
 end
 
 mdadm "/dev/md0" do
-  devices [ "#{disk_list}" ]
+  devices [ "#{disk_a}", "#{disk_b}" ]
   level 0
   chunk 64
   action [ :create, :assemble ]
