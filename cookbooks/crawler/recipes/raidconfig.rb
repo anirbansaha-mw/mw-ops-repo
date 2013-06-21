@@ -37,10 +37,7 @@ mount "/mnt" do
   action :umount
 end
 
-file "/tmp/something" do
-  owner "root"
-  group "root"
-  mode "0644"
-  content "#{disk_list}"
-  action :create
+mount "/mnt" do
+  device "/dev/xvdb"
+  action :disable
 end
