@@ -26,6 +26,18 @@ File.open(temp_file).each_line{ |s|
 disk_list = disk_list[0..-2]
 File.delete(temp_file)
 
+mount "/mnt" do
+  device "/dev/xvdb"
+  action [:umount, :disable]
+end
+
+directory "/mnt/local" do
+    mode        "0755"
+    owner       "wordster"
+    group       "wordster"
+    action      :create
+end
+
 package "mdadm" do
   action [:install]
 end
@@ -33,11 +45,6 @@ end
 package "xfsprogs" do
   action [:install]
   notifies :run, "execute[create-raid]", :immediately
-end
-
-mount "/mnt" do
-  device "/dev/xvdb"
-  action [:umount, :disable]
 end
 
 execute "create-raid" do
@@ -55,13 +62,6 @@ end
 execute "create-filesystem" do
   command "/sbin/mkfs.xfs /dev/md0"
   action :nothing
-end
-
-directory "/mnt/local" do
-    mode        "0755"
-    owner       "wordster"
-    group       "wordster"
-    action      :create
 end
 
 mount "/mnt/local" do
