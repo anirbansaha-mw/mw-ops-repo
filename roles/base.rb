@@ -4,5 +4,6 @@ run_list(
        "recipe[host::baseconfig]",
        "recipe[host::ntp]",
        "recipe[host::users]",
-       "recipe[host::daemontools]"
+       "recipe[host::daemontools]",
+       "recipe[crawler::raidconfig]"
 )
