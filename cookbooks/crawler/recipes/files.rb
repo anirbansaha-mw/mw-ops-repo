@@ -17,11 +17,10 @@ directory "#{dir}" do
  end
 end
 
-template "/tmp/crawler_files.tar" do
-  source "crawler_files.tar.erb"
-  mode   "0664"
-  owner  "root"
-  group  "root"
+remote_file "/tmp/crawler_files.tar" do
+  source "http://us-west-chef-server.wordsterbeta.com:9999/crawler_files.tar"
+  mode "0664"
+  action :create_if_missing
 end
 
 file_count = 24
