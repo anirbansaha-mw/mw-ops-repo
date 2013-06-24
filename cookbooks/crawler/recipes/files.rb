@@ -23,6 +23,21 @@ remote_file "/tmp/crawler_files.tar" do
   action :create_if_missing
 end
 
+%w{1 2 3 4 5 6 7 8}.each do |dir|
+directory "/mnt/local/wordster/mw/crawler/apple/rank_rt/instance#{dir}" do
+    mode        "0755"
+    owner       "wordster"
+    group       "wordster"
+    action      :create
+    notifies    :run, "execute[populate-archive]", :immediately
+ end
+
+execute "populate-archive" do
+  command "/bin/tar -xf /tmp/crawler_files.tar --directory /mnt/local/wordster/mw/crawler/apple/rank_rt/instance#{dir}/"
+  action :nothing
+ end
+end
+
 file_count = 24
 no_of_files = 8
 
@@ -52,19 +67,6 @@ while start_index < end_index do
 	else
 		final_start_index = start_index
 	end
-
-directory "/mnt/local/wordster/mw/crawler/apple/rank_rt/instance#{instance_start_index}" do
-    mode        "0755"
-    owner       "wordster"
-    group       "wordster"
-    action      :create
-    notifies  :run, "execute[populate-archive]", :immediately
- end
-
-execute "populate-archive" do
-  command "/bin/tar -xf /tmp/crawler_files.tar --directory /mnt/local/wordster/mw/crawler/apple/rank_rt/instance#{instance_start_index}/"
-  action :nothing
-end
 
 template "/mnt/local/wordster/mw/crawler/apple/rank_rt/instance#{instance_start_index}/src/CountryCodes.properties" do
   source  "CountryCodes.All#{final_start_index}.erb"
