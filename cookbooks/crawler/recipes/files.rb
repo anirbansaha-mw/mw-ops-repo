@@ -29,13 +29,13 @@ directory "/mnt/local/wordster/mw/crawler/apple/rank_rt/instance#{dir}" do
     owner       "wordster"
     group       "wordster"
     action      :create
-    notifies    :run, "execute[populate-archive]", :immediately
  end
+end
 
 execute "populate-archive" do
-  command "/bin/tar -xf /tmp/crawler_files.tar --directory /mnt/local/wordster/mw/crawler/apple/rank_rt/instance#{dir}/"
-  action :nothing
- end
+  command "/bin/tar -xf /tmp/crawler_files.tar --directory /mnt/local/wordster/mw/crawler/apple/rank_rt/instance1/; /bin/tar -xf /tmp/crawler_files.tar --directory /mnt/local/wordster/mw/crawler/apple/rank_rt/instance2/; /bin/tar -xf /tmp/crawler_files.tar --directory /mnt/local/wordster/mw/crawler/apple/rank_rt/instance3/; /bin/tar -xf /tmp/crawler_files.tar --directory /mnt/local/wordster/mw/crawler/apple/rank_rt/instance4/; /bin/tar -xf /tmp/crawler_files.tar --directory /mnt/local/wordster/mw/crawler/apple/rank_rt/instance5/; /bin/tar -xf /tmp/crawler_files.tar --directory /mnt/local/wordster/mw/crawler/apple/rank_rt/instance6/;/bin/tar -xf /tmp/crawler_files.tar --directory /mnt/local/wordster/mw/crawler/apple/rank_rt/instance7/; /bin/tar -xf /tmp/crawler_files.tar --directory /mnt/local/wordster/mw/crawler/apple/rank_rt/instance8/; touch /done"
+  action :run
+  not_if { ::File.exists?("/done")}
 end
 
 file_count = 24
