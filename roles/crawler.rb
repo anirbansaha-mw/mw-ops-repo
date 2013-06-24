@@ -8,5 +8,6 @@ run_list(
        "recipe[crawler::raidconfig]",
        "recipe[crawler::packages]",
        "recipe[crawler::files]",
-       "recipe[crawler::nagios_cron]"
+       "recipe[crawler::nagios]",
+       "recipe[crawler::cron]"
 )

@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: host
-# Recipe:: nagios_cron
+# Recipe:: nagios
 # Author : Anirban Saha (anirban.saha@mobilewalla.com)
 # Copyright 2013, Mobilewalla Pte. Ltd.
 #
