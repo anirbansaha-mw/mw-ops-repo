@@ -31,7 +31,7 @@ pre_hostname, pre_tier = "#{userdata}".split
 hostname = "#{pre_hostname}".split("=")[1]
 shortname = "#{hostname}".split(".")[0]
 
-host_num = hostname[-1,1]
+host_num = shortname[-1,1]
 host_num = host_num.to_i
 end_index = no_of_files * host_num
 start_index = end_index - no_of_files
