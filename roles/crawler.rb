@@ -5,5 +5,6 @@ run_list(
        "recipe[host::ntp]",
        "recipe[host::users]",
        "recipe[host::daemontools]",
-       "recipe[crawler::raidconfig]"
+       "recipe[crawler::raidconfig]",
+       "recipe[crawler::files]"
 )
