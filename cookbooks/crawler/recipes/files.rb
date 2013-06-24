@@ -74,4 +74,7 @@ template "/mnt/local/wordster/mw/crawler/apple/rank_rt/instance#{instance_start_
   group "wordster"
 end
 
+instance_start_index += 1
+start_index += 1
+
 end
