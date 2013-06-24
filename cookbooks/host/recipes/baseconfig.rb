@@ -32,6 +32,6 @@ template "/etc/hosts" do
 end
 
 execute "set-hostname" do
-  command "/sbin/start hostname"
+  command "/sbin/start hostname; /usr/bin/apt-get -y update"
   action :nothing
 end
