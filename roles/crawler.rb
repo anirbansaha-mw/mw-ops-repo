@@ -7,5 +7,6 @@ run_list(
        "recipe[host::daemontools]",
        "recipe[crawler::raidconfig]",
        "recipe[crawler::packages]",
-       "recipe[crawler::files]"
+       "recipe[crawler::files]",
+       "recipe[crawler::nagios_cron]"
 )
