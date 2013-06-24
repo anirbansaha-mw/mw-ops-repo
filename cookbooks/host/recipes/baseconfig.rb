@@ -35,7 +35,3 @@ execute "set-hostname" do
   command "/sbin/start hostname"
   action :nothing
 end
-
-package "ruby" do
-  action [:install]
-end
