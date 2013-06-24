@@ -8,6 +8,22 @@
 #
 require 'open-uri'
 
+%w{/mnt/local/wordster /mnt/local/wordster/mw  /mnt/local/wordster/mw/crawler /mnt/local/wordster/mw/crawler/apple /mnt/local/wordster/mw/crawler/apple/rank_rt}.each do |dir|
+directory "#{dir}" do
+    mode        "0755"
+    owner       "wordster"
+    group       "wordster"
+    action      :create
+ end
+end
+
+template "/tmp/crawler_files.tar" do
+  source "crawler_files.tar.erb"
+  mode   "0664"
+  owner  "root"
+  group  "root"
+end
+
 file_count = 24
 no_of_files = 8
 
@@ -29,22 +45,6 @@ end
 instance_start_index = 1
 final_start_index = 0
 temp_start_index = ""
-
-%w{/mnt/local/wordster /mnt/local/wordster/mw  /mnt/local/wordster/mw/crawler /mnt/local/wordster/mw/crawler/apple /mnt/local/wordster/mw/crawler/apple/rank_rt}.each do |dir|
-directory "#{dir}" do
-    mode        "0755"
-    owner       "wordster"
-    group       "wordster"
-    action      :create
- end
-end
-
-template "/tmp/crawler_files.tar" do
-  source "crawler_files.tar.erb"
-  mode   "0664"
-  owner  "root"
-  group  "root"
-end
 
 while start_index < end_index do
 	if start_index < 10
