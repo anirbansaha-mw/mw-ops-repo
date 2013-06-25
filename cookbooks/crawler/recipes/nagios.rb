@@ -39,6 +39,9 @@ template "/mnt/local/wordster/mw/nagios/apple/rank_rt/instance1/nagios_log_itune
   mode "0775"
   owner "wordster"
   group "wordster"
+  variables({
+    :instance => "instance1",
+  })
 end
 
 template "/mnt/local/wordster/mw/nagios/apple/rank_rt/instance2/nagios_log_itunesRankCrawlerLog.sh" do
@@ -46,6 +49,9 @@ template "/mnt/local/wordster/mw/nagios/apple/rank_rt/instance2/nagios_log_itune
   mode "0775"
   owner "wordster"
   group "wordster"
+  variables({
+    :instance => "instance2",
+  })
 end
 
 template "/mnt/local/wordster/mw/nagios/apple/rank_rt/instance1/nagios_log_itunesRankCrawlerLog.py" do

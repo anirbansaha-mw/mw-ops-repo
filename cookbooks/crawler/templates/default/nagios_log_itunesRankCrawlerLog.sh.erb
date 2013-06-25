@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /mnt/local/wordster/mw/nagios/apple/rank_rt/instance1/
+cd /mnt/local/wordster/mw/nagios/apple/rank_rt/<%= @instance %>/
 python nagios_log_itunesRankCrawlerLog.py > logs/nagios_log_itunesRankCrawlerLog_`date +%d-%b-%y-%H:%M:%S` 2>&1
