@@ -1,5 +1,5 @@
-name "crawler"
-description "Crawler role (for crawler nodes)"
+name "ratings"
+description "Ratings role (for ratings nodes)"
 run_list(
        "recipe[host::baseconfig]",
        "recipe[host::ntp]",
